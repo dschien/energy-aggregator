@@ -37,3 +37,5 @@ Potentially set your DOCKER_HOST in environment variables according to Docker do
  - Make desired changes to  `ep.docker-local.cfg` or whatever config file you want to use.
  - Run `deploy.sh` again
 ---
+
+![Architecture](https://github.com/dschien/energy-aggregator/raw/master/ea_docs/docs/img/architecture-i-mock.png)
