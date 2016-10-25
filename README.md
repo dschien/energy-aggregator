@@ -7,7 +7,7 @@ Current as of 20.07.2016
 # Development Deployment
 
 ## Clone the project
-Get this project by running `git clone --recursive git@github.com:dschien/ep_site.git`
+Get this project by running `git clone --recursive git@github.com:dschien/energy-aggregator.git`
 (the recursive bit is to also fetch submodules).
 
 Obviously this includes getting git.
