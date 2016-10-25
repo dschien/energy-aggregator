@@ -1,0 +1,12 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block submit_buttons_bottom %}
+    <div class="submit-row">
+        {% url 'api:import_from_site' pk=original.pk as trigger_import_url %}
+        <input type=button
+               onclick="django.jQuery.get('{% add_preserved_filters trigger_import_url %}', function(res){ alert(res.message)});"
+               value="{% trans "Trigger Import" %}">
+    </div>
+    {{ block.super }}
+{% endblock %}

@@ -1,0 +1,51 @@
+body {
+  width: 100%;
+}
+
+#mail {
+
+  #id_text {
+    margin: 0px;
+    width: 711px;
+    height: 237px;
+  }
+
+  label {
+    width: inherit;
+  }
+
+  [for=id_text] {
+    display: none;
+  }
+
+  input[type=submit] {
+    float: right;
+  }
+
+}
+
+#id_text_container > table {
+  width: 100%;
+}
+
+.mceEditor > table {
+  width: 100% !important;
+}
+
+#tinymce {
+  p {
+    font-size: 12px;
+  }
+}
+
+.expired-img {
+  opacity: 0.4;
+  filter: alpha(opacity=40); /* For IE8 and earlier */
+
+}
+
+
+
+
+
+

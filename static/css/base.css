@@ -1,0 +1,131 @@
+/* line 1, ../../scss/base.scss */
+.title {
+    float: left;
+    font-size: 28px;
+    color: #333;
+}
+
+/* line 7, ../../scss/base.scss */
+.subtitle {
+    float: right;
+    font-size: 16px;
+    font-style: italic;
+    text-align: right;
+    margin-top: 20px;
+}
+
+/* line 16, ../../scss/base.scss */
+#banner_pic {
+    margin-bottom: 3px;
+}
+
+/* line 20, ../../scss/base.scss */
+.bgd-navbar {
+    background-color: #9FCE63;
+    margin-top: 20px;
+}
+
+/* line 26, ../../scss/base.scss */
+ul.nav > li.active {
+    background-color: olivedrab;
+}
+
+/* line 30, ../../scss/base.scss */
+li.nav-item a {
+    color: #000000;
+}
+
+/* line 33, ../../scss/base.scss */
+li.nav-item a i {
+    font-weight: bold;
+}
+
+/* line 42, ../../scss/base.scss */
+.navbar .nav {
+    margin: 0;
+    display: table;
+    width: 100%;
+}
+
+/* line 48, ../../scss/base.scss */
+.navbar .nav > li {
+    display: table-cell;
+    width: 20%;
+    float: none;
+    text-align: center;
+}
+
+/* line 55, ../../scss/base.scss */
+.user-menu {
+    float: right;
+    margin-top: 10px;
+}
+
+/* line 70, ../../scss/base.scss */
+.content {
+    font-size: 16px;
+}
+
+/* line 74, ../../scss/base.scss */
+.highlight {
+    font-weight: bold;
+}
+
+/* line 78, ../../scss/base.scss */
+.box {
+    background-color: #9FCE63;
+    max-width: 160px;
+    padding-bottom: 5px;
+}
+
+/* line 84, ../../scss/base.scss */
+.box-content {
+    background-color: white;
+    margin: 5px 5px;
+}
+
+/* line 87, ../../scss/base.scss */
+.box-content p {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 473px) {
+    /* line 93, ../../scss/base.scss */
+    #bgd-event-banner {
+        display: none;
+    }
+
+    /* hide it elsewhere */
+}
+
+/* line 99, ../../scss/base.scss */
+.box-title {
+    padding-left: 40px;
+}
+
+/* line 104, ../../scss/base.scss */
+.fb-follow {
+    bottom: 6px;
+}
+
+/* line 108, ../../scss/base.scss */
+footer {
+    margin-top: 35px;
+    font-size: 12px;
+}
+
+/* line 112, ../../scss/base.scss */
+footer hr {
+    margin-right: 15px;
+    margin-bottom: 0;
+    margin-top: 8px;
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* line 124, ../../scss/base.scss */
+.app-icons {
+    float: right;
+}

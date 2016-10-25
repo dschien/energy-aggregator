@@ -1,0 +1,21 @@
+version: '2'
+services:
+  template:
+    extends:
+      file: docker-compose.yml
+      service: template
+
+  secure_importer:
+  # docker run --name web -h %(sys_type)s  -d -p 8000:8000 --env CONTAINER_NAME=web --link rabbit --link memcache  -v `pwd`:/ep_site -w /ep_site dschien/web deployment/docker-web-prod/entrypoint.sh
+    extends: template
+
+    external_links:
+      - db
+      - memcache
+      - rabbit
+      - influxdb
+
+    command: python manage.py import_secure -r -s ${SECURE_SERVER_NAME}
+    environment:
+      - C_FORCE_ROOT=true
+      - CONTAINER_NAME=secure_importer

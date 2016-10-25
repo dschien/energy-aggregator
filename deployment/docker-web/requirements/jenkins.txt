@@ -1,0 +1,7 @@
+-r requirements.txt
+django-jenkins
+httpretty==0.8.10
+factory-boy==2.6.1
+django-debug-toolbar==1.4
+twisted
+fake-factory

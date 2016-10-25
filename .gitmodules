@@ -1,0 +1,3 @@
+[submodule "deployment/influx"]
+	path = deployment/influx
+	url = https://github.com/dschien/influxdb.git

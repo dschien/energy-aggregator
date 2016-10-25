@@ -1,0 +1,60 @@
+
+version: '2'
+
+services:
+
+  db:
+  # docker run -p 5432:5432 --name db --env-file=etc/docker-env -d --volumes-from pg_data postgres:9.4'
+    image: postgres:9.4
+    container_name: db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    env_file:
+      - etc/docker-env
+    ports:
+      - 5432:5432
+    network_mode: "bridge"
+
+  memcache:
+  # 'docker run -p 11211:11211 --name memcache -d memcached'
+    image: memcached
+    container_name: memcache
+    ports:
+      - 11211:11211
+    network_mode: "bridge"
+
+  rabbit:
+    image: rabbitmq:3.6.2-management
+    container_name: rabbit
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"
+    volumes:
+      - celery_rabbit_data:/var/lib/rabbitmq
+    network_mode: "bridge"
+
+  influxdb:
+  # docker run -d -p 8083:8083 -p 8086:8086 --env-file=etc/docker-env --name influxdb --volumes-from influxdb_data dschien/influxdb:latest
+    build: deployment/influx/0.13
+    container_name: influxdb
+    env_file:
+      - etc/docker-env
+    ports:
+      - 8083:8083
+      - 8086:8086
+    volumes:
+      - influxdb_data:/data
+    network_mode: "bridge"
+
+volumes:
+  celery_rabbit_data:
+    external: true
+  pg_data:
+    external: true
+  influxdb_data:
+    external: true
+

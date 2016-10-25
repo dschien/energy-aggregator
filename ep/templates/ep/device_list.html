@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block css %}
+    <link rel="stylesheet" href='{% static "css/index.css" %}'>
+{% endblock css %}
+{% block page_title %}Energy Portal Home{% endblock %}
+{% block body_class %}{{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <h1>Prefect Devices</h1>
+    <ul>
+        {% for device in object_list %}
+            <li><a href="{% url 'web:device-detail' device.site device.prefect_id %}">{{ device }}</a></li>
+
+        {% empty %}
+            <li>No devices recorded.</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

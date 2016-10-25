@@ -1,0 +1,24 @@
+-r requirements.txt
+
+django-pandas
+
+ipykernel
+ipython
+ipython-genutils
+
+jupyter-client
+jupyter-core
+
+
+matplotlib
+
+nbconvert
+nbformat
+
+notebook
+numpy
+pandas
+
+pyzmq
+
+

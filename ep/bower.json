@@ -1,0 +1,34 @@
+{
+  "name": "energy-portal",
+  "version": "0.0.1",
+  "main": "templates/index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "normalize.css#~3.0.3",
+    "nvd3": "~1.8.1",
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "d3": "~3.5.6"
+  },
+  "install": {
+    "path": "lib",
+    "sources": {}
+  },
+  "devDependencies": {
+    "bootstrap": "~3.3.5"
+  },
+  "homepage": "https://github.com/dschien/ep_site",
+  "authors": [
+    "dschien <dschien@gmail.com>"
+  ],
+  "description": "The EP",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true
+}

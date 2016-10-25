@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+
+{% block css %}
+    <link rel="stylesheet" href='{% static "css/index.css" %}'>
+    <link rel="stylesheet" href='{% static "css/charts.css" %}'>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src='{% static "js/charts.js" %}'></script>
+
+    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>#}
+    {#    <script src='{% static "lib/js/nv.d3.min.js" %}'></script>#}
+    {#    <link rel="stylesheet" href='{% static "lib/css/nv.d3.min.css" %}'>#}
+{% endblock css %}
+
+{% block page_title %}Device{% endblock %}
+{% block body_class %}{{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <h1>Prefect Device {{ node }}</h1>
+
+    <table>
+        <tr>
+            <td>Site</td>
+            <td>{{ node.site }}</td>
+        </tr>
+
+        <tr>
+            <td>Room Name</td>
+            <td>{{ node.space_name }}</td>
+        </tr>
+
+    </table>
+
+    <div id="chart">
+
+    </div>
+
+    <script type="text/javascript">
+        {% url 'api:device_measurements' device.site device.prefect_id as api_endpoint %}
+        document.body.onload = function () {
+            drawTemperatureChart('{{ api_endpoint }}');
+        }
+    </script>
+
+{% endblock content %}

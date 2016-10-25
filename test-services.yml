@@ -1,0 +1,52 @@
+version: '2'
+services:
+  template:
+    extends:
+      file: docker-compose.yml
+      service: template
+
+  iodicus-monitor-template:
+    network_mode: "bridge"
+    hostname: docker-local
+    build: deployment/iodicus-monitor
+    image: lukem512/iodicus-monitor:latest
+
+    environment:
+      - TEST_SECURE_SERVER_HOST
+
+  mock_secure_server:
+  # docker run --name mock_secure_server -d --entrypoint /mock_secure_server_entrypoint.sh lukem512/iodicus-monitor
+    extends: iodicus-monitor-template
+    container_name: mock_secure_server
+
+    ports:
+      - "8080:8080"
+      - "5678:5678"
+
+    command: /usr/src/monitor/mock_secure_server_entrypoint.sh
+    environment:
+      - CONTAINER_NAME=mock_secure_server
+      - SOCKET_PORT=3000
+
+  monitor:
+  # docker -e "DEVICE_PARAMETER_ID=1" -d -e "TARGET_VALUE=123" -e "EP_MESSAGING_HOST=192.168.99.100" -e "EP_MESSAGING_PORT=5672" -e "EP_AUTHORIZATION_TOKEN=YOUR_TOKEN_HERE" -e "EP_API_HOST=web" -e "MOCK_SECURE_SERVER_HOST=mock_secure_secure" -e "MOCK_SECURE_SERVER_SOCKET_PORT=3000" --link web --link mock_secure_server --name monitor lukem512/iodicus-monitor
+    extends: iodicus-monitor-template
+    container_name: monitor
+
+    links:
+      - mock_secure_server
+
+    external_links:
+      - web
+      - rabbit
+
+    command: /usr/src/monitor/monitor_entrypoint.sh
+    environment:
+      - DEVICE_PARAMETER_ID=1
+      - EP_AUTHORIZATION_TOKEN=CHANGE_ME
+      - EP_MESSAGING_HOST=rabbit
+      - EP_MESSAGING_PORT=5672
+      - EP_API_HOST=web
+      - MOCK_SECURE_SERVER_HOST=http://$TEST_SECURE_SERVER_HOST
+      - MOCK_SECURE_SERVER_SOCKET_PORT=3000
+      - CONTAINER_NAME=monitor

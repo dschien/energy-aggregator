@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load i18n %}
+{% block css %}
+    <link rel="stylesheet" href='{% static "css/index.css" %}'>
+{% endblock css %}
+{% block page_title %}Energy Portal Home{% endblock %}
+{% block body_class %}{{ block.super }}{% endblock %}
+
+{% block content %}
+
+    <div class="col-xs-7 col-sm-7 col-md-8">
+        <p>Welcome to the IODiCUS Energy Portal.</p>
+    </div>
+{% endblock content %}

@@ -1,0 +1,92 @@
+version: '2'
+services:
+  template:
+    network_mode: "bridge"
+    hostname: docker-local
+    working_dir: /ep_site    
+    build:
+      context: ./deployment/docker-web
+      dockerfile: Dockerfile${DOCKERFILE_SUFFIX}
+    
+    image: dschien/web${DOCKERFILE_SUFFIX}
+    volumes:
+      - ./:/ep_site
+
+    environment:
+      - TEST_SECURE_SERVER_HOST
+
+#    image: dschien/web:latest
+
+  web:
+  # docker run --name web -h %(sys_type)s  -d -p 8000:8000 --env CONTAINER_NAME=web --link rabbit --link memcache  -v `pwd`:/ep_site -w /ep_site dschien/web deployment/docker-web-prod/entrypoint.sh
+    extends: template
+    container_name: web
+    command: ./run-dev.sh
+
+    environment:
+      - CONTAINER_NAME=web
+    ports:
+      - "8000:8000"
+      - "8888:8888"
+    external_links:
+      - db
+      - memcache
+      - rabbit
+      - influxdb
+
+  integration_test:
+  # docker run --name web -h %(sys_type)s  -d --env CONTAINER_NAME=web --link rabbit --link memcache  -v `pwd`:/ep_site -w /ep_site dschien/web integration_test
+    extends: template
+    container_name: integration_test
+    command: python manage.py integration_test
+
+    environment:
+      - CONTAINER_NAME=integration_test
+    external_links:
+      - db
+      - memcache
+      - rabbit
+      - influxdb
+
+  celery_worker:
+    extends: template
+    container_name: celery_worker
+
+    external_links:
+      - db
+      - memcache
+      - rabbit
+      - influxdb
+
+    command: celery -A ep_site worker -l info
+    environment:
+      - C_FORCE_ROOT=true
+      - CONTAINER_NAME=celery_worker
+
+  celery_beat:
+    extends: template
+    container_name: celery_beat
+
+    external_links:
+      - memcache
+      - rabbit
+      - db
+
+    command: celery -A ep_site beat -l info
+    environment:
+      - C_FORCE_ROOT=true
+      - CONTAINER_NAME=celery_beat
+
+volumes:
+  celery_rabbit_data:
+    external: true
+  pg_data:
+    external: true
+  influxdb_data:
+    external: true
+
+
+#networks:
+#  default:
+#    external:
+#      name: bridge

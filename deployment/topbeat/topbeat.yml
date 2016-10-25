@@ -1,0 +1,12 @@
+input:
+  period: 10
+  procs: [".*"]
+output:
+  elasticsearch:
+    enabled: true
+    hosts: ["http://CHANGE_ME:5043"]
+  tls:
+    certificate: logstash-forwarder.crt
+    certificate_key: logstash-forwarder.key
+    # certificate_authorities: /path/to/ssl-certificate.crt
+    timeout: 15

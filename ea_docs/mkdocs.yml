@@ -1,0 +1,25 @@
+site_name: Energy Aggregator
+
+site_url: http://www.iodicus.org/
+site_description: Energy Aggregator
+
+repo_url: https://github.com/dschien/ep_site
+
+#theme_dir: docs_theme
+
+markdown_extensions:
+ - toc:
+    anchorlink: True
+
+pages:
+- Home: index.md
+- Architecture: architecture.md
+- README: README.md
+- Development:
+    - 'Frontend': 'web_development.md'
+    - 'Server': 'server_development.md'
+- Deployment:
+    - 'Local Development Deployment': dev_deployment.md
+    - 'Server Deployment': server_deployment.md
+
+theme: cosmo

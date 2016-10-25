@@ -1,0 +1,93 @@
+ep.prod.cfg
+/ep/ep_config.py
+local_settings.py
+etc/docker-env
+etc/*.cfg
+
+deployment/topbeat/logstash-forwarder.crt
+deployment/topbeat/logstash-forwarder.key
+
+deployment/iodicus-monitor
+deployment/mock_secure_server
+deployment/mock_ebe
+
+celerybeat.pid
+
+### VirtualEnv template
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+/[Ll]ib
+/ep/local_settings.py
+[Ss]cripts
+pyvenv.cfg
+pip-selfcheck.json
+### Python template
+/celerybeat-schedule.db
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+# fabfile/
+# Distribution / packaging
+/log/*.log
+/static_root_tmp
+/log/*.json
+.idea
+/env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+.ipynb_checkpoints/
+ep/ipythonnb/.ipynb_checkpoints/
+# PyInstaller
+/ep/node_modules
+/ep/bower_components
+/ep/.sass-cache
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Created by .ignore support plugin (hsz.mobi)

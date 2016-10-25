@@ -1,0 +1,36 @@
+amqpstorm>=1.2
+celery>=3.1
+Django==1.9
+pytz>=2015.7
+
+django-cookie-law>=1.0.6
+django-enumfield>=1.2.1
+django-extensions>=1.5.9
+django-model-utils>=2.3.1
+djangorestframework>=3.3.3
+django-weekday-field>=1.1.0
+
+django-celery>=3.1.17
+
+gunicorn>=19.3.0
+psycopg2>=2.6.1
+requests>=2.8.1
+simplejson>=3.8.0
+traitlets>=4.0.0
+python-json-logger>=0.1.4
+django-split-settings>=0.1.3
+flower>=0.8.3
+# no longer used
+websockets>=3.0
+websocket-client
+
+autobahn
+twisted
+
+pylibmc>=1.5.0
+
+ipython
+-e git+git://github.com/dschien/influxdb-python#egg=influxdb
+
+django-markdown2
+-e git+git://github.com/dschien/django-rest-framework-docs#egg=django-rest-framework-docs

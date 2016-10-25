@@ -1,0 +1,9 @@
+# PG docker container creates user, with password and DB schema on first start
+# https://hub.docker.com/_/postgres/
+POSTGRES_USER={{ db_master_username }}
+POSTGRES_PASSWORD={{ db_masteruserpassword }}
+
+# Influx
+ADMIN_USER={{ influxdb_admin_user }}
+INFLUXDB_INIT_PWD={{ influxdb_init_pwd }}
+PRE_CREATE_DB=ep

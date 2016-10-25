@@ -1,0 +1,104 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block extrahead %}{{ block.super }}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src='{% static "js/charts.js" %}'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js'></script>
+
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"
+            integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}
+    <link rel="stylesheet" href='{% static "css/charts.css" %}'>
+{% endblock %}
+{% block after_field_sets %}
+
+    <h3>Intended Value</h3>
+    <input type="text" id="intent"/>
+    <input type="button" id="sb" value="Submit"/>
+    <div id="message_ajax"></div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            (function worker() {
+                {% url 'api:device_measurements_latest' original.id as api_latest_measurement_endpoint %}
+                $.ajax({
+                    url: '{{ api_latest_measurement_endpoint }}',
+                    success: function (data) {
+                        $('.field-latest div p').html(data['value'] + " (" + moment(data['time']).format('DD.MM.YYYY HH:mm:ss') + ") ")
+                        {#                        '<i id="refresh-fa" class="fa fa-refresh fa-spin"></i>'#}
+                        $('.field-latest div p').css('color', 'green');
+
+                        setTimeout(function () {
+                            $('.field-latest div p').css('color', 'black');
+                        }, 1000);
+                    },
+                    complete: function () {
+                        // Schedule the next request when the current one's complete
+                        setTimeout(worker, 5000);
+                    }
+                });
+            })();
+
+
+            $('#intent').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    $("#sb").click();
+                    return false;
+                }
+            });
+
+            // Removed the unnecessary `$(function() { ...` here and the matching closing bits at the end
+            $("#sb").click(function (e) {
+                e.preventDefault();
+                {% url 'api:dp_details' original.id as api_endpoint %}
+
+                var data = JSON.stringify({target_value: $('#intent').val()});
+                $.ajax({
+                    url: '{{ api_endpoint }}',
+                    headers: {
+                        'X-CSRFToken': "{{ csrf_token }}",
+                        'Content-Type': 'application/json'
+                    },
+                    contentType: 'application/json',
+                    type: 'PATCH',
+                    data: data,
+                    success: function (data) {
+
+                        $("#message_ajax").html('<ul id="messagelist" class="messagelist"><li class="success">' + data.message + '</li></ul>');
+                        setTimeout(function () {
+                            $('#messagelist').remove();
+                        }, 5000);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    {{ block.super }}
+{% endblock %}
+
+{#@todo implement#}
+{#{% block after_related_objects %}#}
+{##}
+{#    <h3>History</h3>#}
+{##}
+{#    <div id="chart">#}
+{##}
+{#    </div>#}
+{##}
+{#    <script type="text/javascript">#}
+{#        {% url 'api:device_measurements' original.pk as api_endpoint %}#}
+{#        document.body.onload = function () {#}
+{#            drawTemperatureChart('{{ api_endpoint }}');#}
+{#        }#}
+{#    </script>#}
+{##}
+{##}
+{#    {{ block.super }}#}
+{#{% endblock %}#}

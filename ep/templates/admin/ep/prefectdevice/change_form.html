@@ -1,0 +1,30 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls admin_static admin_modify %}
+
+{% block extrahead %}{{ block.super }}
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src='{% static "js/charts.js" %}'></script>
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}
+    <link rel="stylesheet" href='{% static "css/charts.css" %}'>
+{% endblock %}
+
+{% block after_related_objects %}
+
+    <h3>History</h3>
+
+    <div id="chart">
+
+    </div>
+
+    <script type="text/javascript">
+        {% url 'api:device_measurements' original.site original.prefect_id as api_endpoint %}
+        document.body.onload = function () {
+            drawTemperatureChart('{{ api_endpoint }}');
+        }
+    </script>
+
+
+    {{ block.super }}
+{% endblock %}

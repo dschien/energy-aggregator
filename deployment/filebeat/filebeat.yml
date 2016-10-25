@@ -1,0 +1,57 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - "/home/ubuntu/ep_site/log/*.json"
+#      fields:
+#        type: json
+#      fields_under_root: true
+output:
+  logstash:
+    enabled: true
+
+    hosts: ["CHANGE_ME:5045"]
+    tls:
+#      certificate: /home/ubuntu/ssl/cert.crt
+#      certificate_key: /home/ubuntu/ssl/private.key
+      certificate_authorities: ["/home/ubuntu/ssl/hub.iodicus.net_logstash_self_signed/logstash-forwarder.crt"]
+
+##      certificate: /home/ubuntu/ep_site/deployment/filebeat/logstash-forwarder.crt
+##      certificate_key: /home/ubuntu/ep_site/deployment/filebeat/logstash-forwarder.key
+##      # certificate_authorities: /path/to/ssl-certificate.crt
+#      timeout: 15
+#      insecure: true
+
+#logging:
+
+  # Send all logging output to syslog. On Windows default is false, otherwise
+  # default is true.
+  # to_syslog: true
+
+  # Write all logging output to files. Beats automatically rotate files if rotateeverybytes
+  # limit is reached.
+#  to_files: true
+
+  # To enable logging to files, to_files option has to be set to true
+#  files:
+    # The directory where the log files will written to.
+#    path: /var/log/mybeat
+
+    # The name of the files where the logs are written to.
+    #name: mybeat
+
+    # Configure log file size limit. If limit is reached, log file will be
+    # automatically rotated
+#    rotateeverybytes: 10485760 # = 10MB
+
+    # Number of rotated log files to keep. Oldest files will be deleted first.
+    #keepfiles: 7
+
+  # Enable debug output for selected components. To enable all selectors use ["*"]
+  # Other available selectors are beat, publish, service
+  # Multiple selectors can be chained.
+  #selectors: [ ]
+
+  # Sets log level. The default log level is error.
+  # Available log levels are: critical, error, warning, info, debug
+#  level: info

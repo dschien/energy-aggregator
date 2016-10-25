@@ -1,0 +1,5 @@
+CREATE DATABASE ep
+CREATE USER writer WITH PASSWORD 'writerpass'
+CREATE USER reader WITH PASSWORD 'readerpass'
+GRANT WRITE ON device_parameters TO writer
+GRANT READ ON device_parameters TO reader

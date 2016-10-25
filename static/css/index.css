@@ -1,0 +1,48 @@
+/* line 1, ../../scss/index.scss */
+body {
+    width: 100%;
+}
+
+/* line 7, ../../scss/index.scss */
+#mail #id_text {
+    margin: 0px;
+    width: 711px;
+    height: 237px;
+}
+
+/* line 13, ../../scss/index.scss */
+#mail label {
+    width: inherit;
+}
+
+/* line 17, ../../scss/index.scss */
+#mail [for=id_text] {
+    display: none;
+}
+
+/* line 21, ../../scss/index.scss */
+#mail input[type=submit] {
+    float: right;
+}
+
+/* line 27, ../../scss/index.scss */
+#id_text_container > table {
+    width: 100%;
+}
+
+/* line 31, ../../scss/index.scss */
+.mceEditor > table {
+    width: 100% !important;
+}
+
+/* line 36, ../../scss/index.scss */
+#tinymce p {
+    font-size: 12px;
+}
+
+/* line 41, ../../scss/index.scss */
+.expired-img {
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+    /* For IE8 and earlier */
+}
